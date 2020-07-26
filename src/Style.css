@@ -1,28 +1,20 @@
-html, body, #container, .carousel {
-	height:100%;
-	margin: 0;
-	width: 100%;
+.carousel {
+    /* position: ; */
+    margin: 0;
+    width: 100%;
 }
 
-
-.image-slide {
-	height: 100%;
-	width: 100%;
-	transition: background-image .3s ease-in-out;
+img {
+    height: 50vh;
+    width: 50%;
+    display: block;
+    margin: 0 auto;
 }
 
-.slide-arrow {
-	color: blue;
-	cursor: pointer;
-	font-size: 2rem;
-	position: fixed;
-	top: 50%;
-}
-
-.slide-arrow.right {
-	right: 1rem;
-}
-
-.slide-arrow.left {
-	left: 1rem;
-}
+/* .slide-arrow {
+    color: blue;
+    cursor: pointer;
+    font-size: 2rem;
+    position: fixed;
+    top: 50%;
+} */

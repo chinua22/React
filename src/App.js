@@ -1,85 +1,72 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './Style.css';
+import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faChevronLeft,
+    faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
+import "./Style.css";
 
 const imgUrls = [
-  "https://cmeimg-a.akamaihd.net/640/clsd/getty/c64f76dc20c246ca88ee180fe4b4b781",
-  "https://lh3.googleusercontent.com/oxPeODS2m6rYIVbhcQChRtOWEYeGDwbeeeB1cDU2o_WYAVPU61VIgx-_6BAh5gSL8Sw=h900",
-  "https://i0.wp.com/www.universodegatos.com/wp-content/uploads/2017/04/fivfelv7.jpg?resize=582%2C328",
-  "https://i.pinimg.com/736x/07/c3/45/07c345d0eca11d0bc97c894751ba1b46.jpg",
-  "https://ehealthforum.com/health/images/avatars/11699147425707699031013.jpeg",
-  
+    "https://images.pexels.com/photos/47547/squirrel-animal-cute-rodents-47547.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "https://images.pexels.com/photos/247502/pexels-photo-247502.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "https://images.pexels.com/photos/97533/pexels-photo-97533.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "https://images.pexels.com/photos/635499/pexels-photo-635499.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "https://images.pexels.com/photos/326900/pexels-photo-326900.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
 ];
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+class App extends Component {
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      currentImageIndex: 0
-    };
+        this.state = {
+            currentImageIndex: 0,
+        };
 
-    this.nextSlide = this.nextSlide.bind(this);
-    this.previousSlide = this.previousSlide.bind(this);
-  }
+        this.nextSlide = this.nextSlide.bind(this);
+        this.previousSlide = this.previousSlide.bind(this);
+    }
 
-  previousSlide() {
-    const lastIndex = imgUrls.length - 1;
-    const { currentImageIndex } = this.state;
-    const shouldResetIndex = currentImageIndex === 0;
-    const index = shouldResetIndex ? lastIndex : currentImageIndex - 1;
+    previousSlide() {
+        const lastIndex = imgUrls.length - 1;
+        const { currentImageIndex } = this.state;
+        const shouldResetIndex = currentImageIndex === 0;
+        const index = shouldResetIndex ? lastIndex : currentImageIndex - 1;
 
-    this.setState({
-      currentImageIndex: index
-    });
-  }
+        this.setState({
+            currentImageIndex: index,
+        });
+    }
 
-  nextSlide() {
-    const lastIndex = imgUrls.length - 1;
-    const { currentImageIndex } = this.state;
-    const shouldResetIndex = currentImageIndex === lastIndex;
-    const index = shouldResetIndex ? 0 : currentImageIndex + 1;
+    nextSlide() {
+        const lastIndex = imgUrls.length - 1;
+        const { currentImageIndex } = this.state;
+        const shouldResetIndex = currentImageIndex === lastIndex;
+        const index = shouldResetIndex ? 0 : currentImageIndex + 1;
 
-    this.setState({
-      currentImageIndex: index
-    });
-  }
+        this.setState({
+            currentImageIndex: index,
+        });
+    }
 
-  render() {
-    return (
-      <div className="carousel">
-        <Arrow direction="left" clickFunction={this.previousSlide} glyph="&#9664;" />
-        <ImageSlide url={imgUrls[this.state.currentImageIndex]} />
-        <Arrow direction="right" clickFunction={this.nextSlide} glyph="&#9654;" />
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="carousel">
+                <div>
+                    <FontAwesomeIcon
+                        id="move"
+                        icon={faChevronLeft}
+                        onClick={this.previousSlide}
+                    />
+                    <img src={imgUrls[this.state.currentImageIndex]} />
+                    <FontAwesomeIcon
+                        id="move1"
+                        icon={faChevronRight}
+                        onClick={this.nextSlide}
+                    />
+                </div>
+            </div>
+        );
+    }
 }
-
-const Arrow = ({ direction, clickFunction, glyph }) => (
-  <div
-    className={`slide-arrow ${direction}`}
-    onClick={clickFunction}>
-    {glyph}
-  </div>
-);
-
-const ImageSlide = ({ url }) => {
-  const styles = {
-    backgroundImage: `url(${url})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center'
-  };
-
-  return (
-    <div className="image-slide" style={styles}></div>
-  );
-}
-
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
-
-
+//
 export default App;
